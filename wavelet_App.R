@@ -51,7 +51,7 @@ date12 <- index(price.pair)[-1]
 r1 <- cbind(1:(length(price.pair$WTI)), rWTI$WTI[1: length(price.pair$WTI)])
 r2 <- cbind(1:(length(price.pair$HTG)), rHTG$HTG[1: length(price.pair$HTG)])
 
-#Wavelet Coherence Plot Water and Energy
+#Wavelet Coherence Plot
 wtc.r12=wtc(r1[-1,], r2[-1,], quiet = TRUE, nrands = 100)
 #wtc.r12$xaxis <- date12
 par(oma=c(0, 0, 0, 1), mar=c(5, 4, 5, 5) + 0.1)
@@ -91,9 +91,7 @@ system.time(wsd <-wsd(signal1 = r1[-1,2], signal2 = r2[-1,2], scales = scales, d
                       windowrad = windowrad, rdist = rdist, mc_nrand = nrand,
                       wname = "MORLET", parallel = TRUE, makefigure = TRUE))
 
-#The lighter the color the higher the similarity of change in water and energy. Scale is level of similarity. 
-#I need to change the labeling and understand the interpretation of each part of the functions
-
+#The lighter the color the higher the similarity of change. Scale is level of similarity. 
 
 #=====================================================================================#
 # PURPOSE : Application of Wavelet-ARIMA hybrid model for forecasting time series     #
@@ -154,16 +152,11 @@ WaveletFittingarma<- function(ts,Waveletlevels,boundary,FastFlag,MaxARParam,MaxM
 
 ############################################################
 
-#To do: (1) save predictive intervals and plot alongside the predictions and then also (2) RMSE, MAE and formal tests such as Diebold & Mariano.
-
-#https://insightr.wordpress.com/2017/11/09/formal-ways-to-compare-forecasting-models-rolling-windows/
-#Do a one step-ahead forecast - similar to TS Class for babies forecast (see these plots)
-
 #One 
 
 #Wavelet
 #Set up the correct data frame
-###################### I added returns here
+###################### Can add returns here instead of prices
 rWTI <- as.data.frame((price.pair$WTI))
 rHTG <- as.data.frame((price.pair$HTG))
 
@@ -172,7 +165,6 @@ date12 <- index(price.pair)
 #save Prices in Matrix
 r1 <- cbind(1:(length(price.pair$WTI)), rWTI$WTI[1: length(price.pair$WTI)])
 r2 <- cbind(1:(length(price.pair$HTG)), rHTG$HTG[1: length(price.pair$HTG)])
-
 
 forecastlength <- floor(length(r1[,2])/2)
 splitTSOne <- r1[1:forecastlength,2]
@@ -200,19 +192,12 @@ system.time(for(i in 1:ceiling(length(r1[,2])/2)){  #
 }
 )
 
+#TS One      
+#Calculations for MSE and SE                                   
 errorOne <- r1[forecastlength:length(r1[,2]),2] - as.numeric(newTSOne[forecastlength:length(r1[,2])])
 MSE_One <- mean(errorOne^2)
 Sd_UP_One <- newTSOne_Upper
 Sd_DOWN_One <- newTSOne_Lower
-
-#png("/Users/kcr2/Dropbox/Kim Folder/Resume and Research/Research/Projects/Paper/Plots/WaveletForecast__One.png",width = 680, height = 480)
-plot(ts(r1[,2]), xlab = "Date", ylab = "Price", main = "One-Step ahead Wavelet Arima Forecast")
-#axis(1, at = r1[,1], labels = date1, las = 1)
-lines(ts(newTSOne), col = c("red"))
-lines(as.numeric(Sd_UP_One), col = "lightblue", lty = 2)
-lines(as.numeric(Sd_DOWN_One), col = "lightblue", lty = 2)
-text(locator(1),"MSE One = 0.95", 4)
-#dev.off()
 
 splitTSOne2 <- as.xts(r1[,2], order.by = date12) 
 colnames(splitTSOne2) <- "Original Series"
@@ -223,10 +208,9 @@ colnames(Sd_UP_One) <- "Upper 95% Prediction Interval"
 Sd_DOWN_One <- as.xts(as.numeric(Sd_DOWN_One), order.by = date12)
 colnames(Sd_DOWN_One) <- "Lower 95% Prediction Interval"
 chart.TimeSeries(cbind(splitTSOne2, newTSOne2, Sd_UP_One, Sd_DOWN_One), lty = c(2,1,1,1), colorset = rainbow10equal, legend.loc = "topright", ylab = "Prices", main = "One-Step ahead Wavelet Arima Forecast | One", las = 3,lwd =1)
-text(locator(1),"MSE One = 0.33", 4)
+text(locator(1),"MSE One = 0.33", 4)   #Subject to change given value above
 
-#Two 
-
+#TS Two 
 forecastlength <- floor(length(r2[,2])/2)
 splitTSTwo <- r2[1:forecastlength,2]
 Waveletlevels <- floor(log(length(splitTSTwo)))
@@ -245,15 +229,13 @@ system.time(
   }
 )
 
-#Calculations
-
-errorTwo <- r2[1305:length(r2[,2]),2] - as.numeric(newTSTwo[1305:2609])
+#Calculations for MSE and SE
+errorTwo <- r2[forecastlength:length(r2[,2]),2] - as.numeric(newTSTwo[forecastlength:length(r2[,2])])
 MSE_Two <- mean(errorTwo^2)
 Sd_UP_Two <- newTSTwo_Upper
 Sd_DOWN_Two <- newTSTwo_Lower
 
-
-#Do a one step-ahead forecast - similar to TS Class for babies forecast
+#Do a one step-ahead forecast
 splitTSTwo2 <- as.xts(r2[,2], order.by = date1) 
 colnames(splitTSTwo2) <- "Original Series"
 newTSTwo2 <- as.xts(as.numeric(newTSTwo), order.by = date1)
@@ -262,8 +244,8 @@ Sd_UP_Two <- as.xts(as.numeric(newTSTwo_Upper), order.by = date1)
 colnames(Sd_UP_Two) <- "One Std Deviation Up"
 Sd_DOWN_Two <- as.xts(as.numeric(newTSTwo_Lower), order.by = date1)
 colnames(Sd_DOWN_Two) <- "One Std Deviation Down"
-chart.TimeSeries(cbind(splitTSTwo2[2305:2609], newTSTwo2[2305:2609], Sd_UP_Two[2305:2609], Sd_DOWN_Two[2305:2609]), lty = c(2,1,1,1), colorset = rainbow10equal, legend.loc = "bottomright", ylab = "Prices", main = "One-Step ahead Wavelet Arima Forecast | Two", las = 3, lwd =1)
-text(locator(1),"MSE Two = 0.063", 4)
+chart.TimeSeries(cbind(splitTSTwo2, newTSTwo2, Sd_UP_Two, Sd_DOWN_Two), lty = c(2,1,1,1), colorset = rainbow10equal, legend.loc = "bottomright", ylab = "Prices", main = "One-Step ahead Wavelet Arima Forecast | Two", las = 3, lwd =1)
+text(locator(1),"MSE Two = 0.063", 4)   #Subject to change given value above
 par(mfrow=c(1,1))
 
 png("/Users/kcr2/Dropbox/Kim Folder/Resume and Research/Research/Projects/Paper/Plots/WaveletForecast__Two.png",width = 680, height = 480)
@@ -276,8 +258,7 @@ splitTSTwo <- splitTSTwo
 save.image(file = "Two_One")
 testing_table <- cbind(do.call(cbind,wfit2$WVSeries@W), wfit2$WVSeries@V[[Waveletlevels]])
 nTS <- rowSums(testing_table)
-SumsTS <- as.xts(nTS, order.by = date1[1:1304])
-OriginalTS <- as.xts(newTSOne, order.by = date1[1:1304])
+SumsTS <- as.xts(nTS, order.by = date1[1:forecastlength])
+OriginalTS <- as.xts(newTSOne, order.by = date1[1:forecastlength])
 plot.ts(cbind(nTS, newTSOne), main = "Reconstructed Coefficient Sums and Original Time Series", ylab = c("Sums", "Original"))
-#SideShow
 
