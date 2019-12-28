@@ -6,7 +6,7 @@
 *There are supplementary materials for three papers the repository. For easy reference we refer to the three series of papers as the Application, Method, and Forecasting Paper, respectively.*
 
 ### **Application Paper**
-This paper is primarily written to communicate the usage of wavelet techniques for non-stationary time seires in Finance and Economics.
+This paper is primarily written to communicate the usage of wavelet techniques for non-stationary time series in Finance and Economics. We specifically apply the techniques to the complex behaviors in the Water-Energy Nexus. 
 
 **Reference: [Time-varying wavelet-based applications for evaluating the Water-Energy Nexus](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3123858)**
 
