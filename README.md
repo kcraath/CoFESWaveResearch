@@ -18,7 +18,7 @@ In this paper we develop a novel Wavelet thresholding technique using the L<sub>
 ### **Forecasting Paper**
 This paper uses the extra parameters extracted using the WaveL<sub>2</sub>E tresholding techniques to forecast the non-stationary time series.
 
-**Reference: [Advanced forecasting after time-series denoising using novel hybrid wavelet-L<sub>2</sub>E (WaveL<sub>2</sub>E) thresholding method]()**
+**Reference: [State space forecasting after denoising with novel hybrid wavelet-L<sub>2</sub>E (WaveL<sub>2</sub>E) thresholding method]()**
 
 
 ---
