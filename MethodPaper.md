@@ -1,4 +1,4 @@
-# Method Paper Details
+# Methods Paper Details
 
 Abstract: 
 
