@@ -20,6 +20,8 @@ This paper uses the extra parameters extracted using the WaveL<sub>2</sub>E tres
 
 **Reference: [Advanced volatility forecasting after time-series denoising using novel hybrid wavelet-L<sub>2</sub>E (WaveL<sub>2</sub>E) thresholding method]()**
 
+
+---
 #### Instructions to Install R:
 
 1. Go to www.r-project.org.
