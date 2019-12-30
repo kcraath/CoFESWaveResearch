@@ -3,7 +3,7 @@
     
 ## Papers using CoFESWave
 
-*There are supplementary materials for three papers the repository. For easy reference we refer to the three series of papers as the Application, Method, and Forecasting Paper, respectively.*
+*There are supplementary materials for three papers the repository. For easy reference we refer to the three part series of papers as the Application, Method, and Forecasting Paper, respectively.*
 
 ### **Application Paper**
 This paper is primarily written to communicate the usage of wavelet techniques for non-stationary time series in Finance and Economics. We specifically apply the techniques to the complex behaviors in the Water-Energy Nexus. 
