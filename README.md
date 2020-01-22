@@ -16,7 +16,7 @@ In this paper we develop a novel Wavelet thresholding technique using the L<sub>
 **Reference: [Denoising Non-stationary Signals by Dynamic Multivariate Complex Wavelet Thresholding]()**
 
 ### **Forecasting Paper**
-This paper uses the extra parameters extracted using the WaveL<sub>2</sub>E tresholding techniques to forecast the non-stationary time series.
+This paper uses the extra parameters extracted using the WaveL<sub>2</sub>E tresholding techniques to forecast the highly persistent returns series as an adjusted Stochastic Volatility Model. 
 
 **Reference: [WaveL<sub>2</sub>E Stochastic Volatility Models: An Application to the Water-Energy Nexus]()**
 
