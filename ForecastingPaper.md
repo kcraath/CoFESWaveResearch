@@ -2,6 +2,6 @@
 
 Abstract: 
 
-
+Forecasting commodity markets are difficult due to the time-varying nature and complexity of the financial return series representing these markets. Over the past few decades, statistical tools have come about to remedy these challenges. These methods focus on identifying the time-varying behavior and incorporating the characteristics within proposed models. This paper augments a series of well-known stochastic volatility models by first applying the $WaveL_2E$ thresholding method. The $WaveL_2E$ method denoises non-stationary time series by dynamic multivariate complex wavelet thresholding. This method combines Morlet's complex continuous wavelet transform with Scott's multivariate minimum distance partial density estimation. The volatility clustering within the signal is estimated through the models' ability to identify abrupt changes in the mean behavior as well as accurately threshold groups of outliers. Through the optimization and recovery of the partial density parameters as time series, the $WaveL_2E$ method can find the optimal signal and simultaneously identify the time-dependent variance components. After a thorough overview of the accuracy of the proposed models. We forecast the dynamic behavior of the recovered signal by simultaneously modeling volatility in the observed signal and the noise variance components. Our forecasted results show that the newly proposed $WaveL_2E$ stochastic volatility models are promising forecasting tools highly persistent containing returns. 
 
 Code: https://github.com/kcraath/CoFESWave
