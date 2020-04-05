@@ -13,7 +13,7 @@ This paper is primarily written to communicate the usage of wavelet techniques f
 ### **Methods Paper**
 In this paper we develop a novel Wavelet thresholding technique using the L<sub>2</sub>E developed by our co-author David W. Scott. This method was primarily developed to address issues that are not efficiently addressed by non-stationary time-series tools.
 
-**Reference: [Denoising Non-stationary Signals by Dynamic Multivariate Complex Wavelet Thresholding]()**
+**Reference: [Denoising Non-stationary Signals by Dynamic Multivariate Complex Wavelet Thresholding](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3528714)**
 
 ### **Forecasting Paper**
 This paper uses the extra parameters extracted using the WaveL<sub>2</sub>E tresholding techniques to forecast the highly persistent returns series as an adjusted Stochastic Volatility Model. 
